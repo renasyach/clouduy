@@ -41,31 +41,25 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'nim' => 'required|string|unique:members,nim|max:50',
-            'role' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:50',
-            'github' => 'nullable|url|max:255',
-            'linkedin' => 'nullable|url|max:255',
-            'bio' => 'nullable|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'nama'           => 'required|string|max:255',
+            'nim'            => 'required|string|unique:members,nim|max:50',
+            'tanggung_jawab' => 'nullable|string',
+            'foto'           => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        $data = $request->except('photo');
+        $data = $request->except('foto');
 
-        if ($request->hasFile('photo')) {
-            $image = $request->file('photo');
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
             $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-            
-            // Ensure folder public/images/members exists
+
             $destinationPath = public_path('images/members');
             if (!File::exists($destinationPath)) {
                 File::makeDirectory($destinationPath, 0755, true, true);
             }
-            
+
             $image->move($destinationPath, $imageName);
-            $data['photo'] = 'images/members/' . $imageName;
+            $data['foto'] = 'images/members/' . $imageName;
         }
 
         Member::create($data);
@@ -87,38 +81,33 @@ class MemberController extends Controller
     public function update(Request $request, Member $member)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'nim' => 'required|string|max:50|unique:members,nim,' . $member->id,
-            'role' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:50',
-            'github' => 'nullable|url|max:255',
-            'linkedin' => 'nullable|url|max:255',
-            'bio' => 'nullable|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'nama'           => 'required|string|max:255',
+            'nim'            => 'required|string|max:50|unique:members,nim,' . $member->id,
+            'tanggung_jawab' => 'nullable|string',
+            'foto'           => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        $data = $request->except('photo');
+        $data = $request->except('foto');
 
-        if ($request->hasFile('photo')) {
-            // Delete old photo if it is not a seeded default (like andi.png, budi.png, etc.)
-            if ($member->photo && !in_array($member->photo, ['images/members/andi.png', 'images/members/budi.png', 'images/members/citra.png', 'images/members/dewi.png'])) {
-                $oldPhotoPath = public_path($member->photo);
+        if ($request->hasFile('foto')) {
+            // Delete old photo if exists
+            if ($member->foto) {
+                $oldPhotoPath = public_path($member->foto);
                 if (File::exists($oldPhotoPath)) {
                     File::delete($oldPhotoPath);
                 }
             }
 
-            $image = $request->file('photo');
+            $image = $request->file('foto');
             $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-            
+
             $destinationPath = public_path('images/members');
             if (!File::exists($destinationPath)) {
                 File::makeDirectory($destinationPath, 0755, true, true);
             }
-            
+
             $image->move($destinationPath, $imageName);
-            $data['photo'] = 'images/members/' . $imageName;
+            $data['foto'] = 'images/members/' . $imageName;
         }
 
         $member->update($data);
@@ -131,9 +120,8 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        // Delete photo if it's not a seeded default
-        if ($member->photo && !in_array($member->photo, ['images/members/andi.png', 'images/members/budi.png', 'images/members/citra.png', 'images/members/dewi.png'])) {
-            $photoPath = public_path($member->photo);
+        if ($member->foto) {
+            $photoPath = public_path($member->foto);
             if (File::exists($photoPath)) {
                 File::delete($photoPath);
             }

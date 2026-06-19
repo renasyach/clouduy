@@ -23,8 +23,7 @@
                 <tr>
                     <th>Anggota</th>
                     <th>NIM</th>
-                    <th>Peran</th>
-                    <th>Kontak</th>
+                    <th>Tanggung Jawab</th>
                     <th style="width: 180px;">Aksi</th>
                 </tr>
             </thead>
@@ -33,10 +32,9 @@
                     <tr>
                         <td>
                             <div class="table-member-profile">
-                                <img src="{{ asset($member->photo ?? 'images/default-avatar.png') }}" alt="{{ $member->name }}" class="table-member-photo">
+                                <img src="{{ asset($member->foto ?? 'images/default-avatar.png') }}" alt="{{ $member->nama }}" class="table-member-photo">
                                 <div>
-                                    <div class="table-member-name">{{ $member->name }}</div>
-                                    <div style="font-size: 0.8rem; color: var(--text-muted);">{{ $member->email }}</div>
+                                    <div class="table-member-name">{{ $member->nama }}</div>
                                 </div>
                             </div>
                         </td>
@@ -45,16 +43,8 @@
                         </td>
                         <td>
                             <span style="background: rgba(99, 102, 241, 0.15); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(99, 102, 241, 0.25);">
-                                {{ $member->role }}
+                                {{ $member->tanggung_jawab ?? '-' }}
                             </span>
-                        </td>
-                        <td>
-                            <div style="font-size: 0.85rem; color: var(--text-secondary);">
-                                <div><i class="fa-solid fa-phone" style="width: 14px; font-size: 0.75rem; color: var(--text-muted);"></i> {{ $member->phone ?? '-' }}</div>
-                                @if($member->github)
-                                    <div><i class="fa-brands fa-github" style="width: 14px; font-size: 0.75rem; color: var(--text-muted);"></i> GitHub terhubung</div>
-                                @endif
-                            </div>
                         </td>
                         <td>
                             <div class="actions-cell">
@@ -73,7 +63,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" style="text-align: center; padding: 3rem 1rem; color: var(--text-secondary);">
+                        <td colspan="4" style="text-align: center; padding: 3rem 1rem; color: var(--text-secondary);">
                             <i class="fa-solid fa-users-slash" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 0.75rem; display: block;"></i>
                             Belum ada anggota terdaftar. Klik tombol <strong>Tambah Anggota</strong> untuk menambahkan.
                         </td>

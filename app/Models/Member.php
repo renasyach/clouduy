@@ -7,14 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     protected $fillable = [
-        'name',
+        'nama',
         'nim',
-        'role',
-        'email',
-        'phone',
-        'photo',
-        'github',
-        'linkedin',
-        'bio',
+        'tanggung_jawab',
+        'foto',
     ];
 }

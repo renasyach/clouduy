@@ -19,160 +19,75 @@
                 <span class="form-label">Foto Profil</span>
                 <div style="width: 100%; height: 220px; border-radius: var(--radius-md); border: 2px dashed var(--card-border); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: rgba(15, 23, 42, 0.4); position: relative;" id="previewContainer">
                     <img 
-                        src="{{ $member->photo ? asset($member->photo) : '' }}" 
+                        src="{{ $member->foto ? asset($member->foto) : '' }}" 
                         id="photoPreview" 
-                        style="width: 100%; height: 100%; object-fit: cover; display: {{ $member->photo ? 'block' : 'none' }};"
+                        style="width: 100%; height: 100%; object-fit: cover; display: {{ $member->foto ? 'block' : 'none' }};"
                     >
-                    <div id="previewPlaceholder" style="text-align: center; padding: 1rem; color: var(--text-muted); display: {{ $member->photo ? 'none' : 'block' }};">
+                    <div id="previewPlaceholder" style="text-align: center; padding: 1rem; color: var(--text-muted); display: {{ $member->foto ? 'none' : 'block' }};">
                         <i class="fa-solid fa-cloud-arrow-up" style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary);"></i>
                         <div style="font-size: 0.75rem; font-weight: 600;">Klik untuk upload</div>
                         <div style="font-size: 0.65rem;">Max size: 2MB</div>
                     </div>
                     <input 
                         type="file" 
-                        name="photo" 
-                        id="photoInput" 
+                        name="foto" 
+                        id="fotoInput" 
                         accept="image/*" 
                         style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 5;"
                     >
                 </div>
-                @error('photo')
+                @error('foto')
                     <span class="form-error">{{ $message }}</span>
                 @enderror
             </div>
 
             <!-- Right Side: Text inputs -->
             <div>
-                <!-- Name Input -->
+                <!-- Nama Input -->
                 <div class="form-group">
-                    <label for="name" class="form-label">Nama Lengkap</label>
+                    <label for="nama" class="form-label">Nama Lengkap</label>
                     <input 
                         type="text" 
-                        name="name" 
-                        id="name" 
+                        name="nama" 
+                        id="nama" 
                         class="form-control" 
-                        value="{{ old('name', $member->name) }}" 
+                        value="{{ old('nama', $member->nama) }}" 
                         placeholder="Masukkan nama lengkap" 
                         required
                     >
-                    @error('name')
+                    @error('nama')
                         <span class="form-error">{{ $message }}</span>
                     @enderror
                 </div>
 
-                <!-- NIM & Role Input Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label for="nim" class="form-label">Nomor Induk Mahasiswa (NIM)</label>
-                        <input 
-                            type="text" 
-                            name="nim" 
-                            id="nim" 
-                            class="form-control" 
-                            value="{{ old('nim', $member->nim) }}" 
-                            placeholder="NIM Anggota" 
-                            required
-                        >
-                        @error('nim')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="role" class="form-label">Peran / Jabatan</label>
-                        <input 
-                            type="text" 
-                            name="role" 
-                            id="role" 
-                            class="form-control" 
-                            value="{{ old('role', $member->role) }}" 
-                            placeholder="Contoh: Frontend Developer" 
-                            required
-                        >
-                        @error('role')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <!-- Email & Phone Input Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label for="email" class="form-label">Alamat Email</label>
-                        <input 
-                            type="email" 
-                            name="email" 
-                            id="email" 
-                            class="form-control" 
-                            value="{{ old('email', $member->email) }}" 
-                            placeholder="nama@student.univ.ac.id" 
-                            required
-                        >
-                        @error('email')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone" class="form-label">Nomor Telepon / WA</label>
-                        <input 
-                            type="text" 
-                            name="phone" 
-                            id="phone" 
-                            class="form-control" 
-                            value="{{ old('phone', $member->phone) }}" 
-                            placeholder="Contoh: +62812345678"
-                        >
-                        @error('phone')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <!-- Social Links Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label for="github" class="form-label">Link GitHub (Opsional)</label>
-                        <input 
-                            type="url" 
-                            name="github" 
-                            id="github" 
-                            class="form-control" 
-                            value="{{ old('github', $member->github) }}" 
-                            placeholder="https://github.com/username"
-                        >
-                        @error('github')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="linkedin" class="form-label">Link LinkedIn (Opsional)</label>
-                        <input 
-                            type="url" 
-                            name="linkedin" 
-                            id="linkedin" 
-                            class="form-control" 
-                            value="{{ old('linkedin', $member->linkedin) }}" 
-                            placeholder="https://linkedin.com/in/username"
-                        >
-                        @error('linkedin')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <!-- Bio / Deskripsi -->
+                <!-- NIM Input -->
                 <div class="form-group">
-                    <label for="bio" class="form-label">Biografi Singkat</label>
+                    <label for="nim" class="form-label">Nomor Induk Mahasiswa (NIM)</label>
+                    <input 
+                        type="text" 
+                        name="nim" 
+                        id="nim" 
+                        class="form-control" 
+                        value="{{ old('nim', $member->nim) }}" 
+                        placeholder="NIM Anggota" 
+                        required
+                    >
+                    @error('nim')
+                        <span class="form-error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Tanggung Jawab Input -->
+                <div class="form-group">
+                    <label for="tanggung_jawab" class="form-label">Tanggung Jawab</label>
                     <textarea 
-                        name="bio" 
-                        id="bio" 
+                        name="tanggung_jawab" 
+                        id="tanggung_jawab" 
                         rows="4" 
                         class="form-control" 
-                        placeholder="Deskripsikan secara singkat keahlian, tugas, atau biografi anggota di kelompok ini..."
-                    >{{ old('bio', $member->bio) }}</textarea>
-                    @error('bio')
+                        placeholder="Deskripsikan tanggung jawab anggota dalam kelompok..."
+                    >{{ old('tanggung_jawab', $member->tanggung_jawab) }}</textarea>
+                    @error('tanggung_jawab')
                         <span class="form-error">{{ $message }}</span>
                     @enderror
                 </div>
@@ -194,11 +109,11 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const photoInput = document.getElementById('photoInput');
+        const fotoInput = document.getElementById('fotoInput');
         const photoPreview = document.getElementById('photoPreview');
         const previewPlaceholder = document.getElementById('previewPlaceholder');
 
-        photoInput.addEventListener('change', function() {
+        fotoInput.addEventListener('change', function() {
             const file = this.files[0];
             if (file) {
                 const reader = new FileReader();

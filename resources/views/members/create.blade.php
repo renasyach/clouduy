@@ -6,7 +6,7 @@
 <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
     <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem;">
         <h1 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.25rem;">Tambah Anggota Kelompok</h1>
-        <p style="color: var(--text-secondary); font-size: 0.9rem;">Masukkan data lengkap anggota kelompok beserta foto profil terbarunya.</p>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">Masukkan data anggota kelompok beserta foto profil.</p>
     </div>
 
     <form action="{{ route('members.store') }}" method="POST" enctype="multipart/form-data">
@@ -25,149 +25,64 @@
                     </div>
                     <input 
                         type="file" 
-                        name="photo" 
-                        id="photoInput" 
+                        name="foto" 
+                        id="fotoInput" 
                         accept="image/*" 
                         style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 5;"
                     >
                 </div>
-                @error('photo')
+                @error('foto')
                     <span class="form-error">{{ $message }}</span>
                 @enderror
             </div>
 
             <!-- Right Side: Text inputs -->
             <div>
-                <!-- Name Input -->
+                <!-- Nama Input -->
                 <div class="form-group">
-                    <label for="name" class="form-label">Nama Lengkap</label>
+                    <label for="nama" class="form-label">Nama Lengkap</label>
                     <input 
                         type="text" 
-                        name="name" 
-                        id="name" 
+                        name="nama" 
+                        id="nama" 
                         class="form-control" 
-                        value="{{ old('name') }}" 
+                        value="{{ old('nama') }}" 
                         placeholder="Masukkan nama lengkap" 
                         required
                     >
-                    @error('name')
+                    @error('nama')
                         <span class="form-error">{{ $message }}</span>
                     @enderror
                 </div>
 
-                <!-- NIM & Role Input Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label for="nim" class="form-label">Nomor Induk Mahasiswa (NIM)</label>
-                        <input 
-                            type="text" 
-                            name="nim" 
-                            id="nim" 
-                            class="form-control" 
-                            value="{{ old('nim') }}" 
-                            placeholder="NIM Anggota" 
-                            required
-                        >
-                        @error('nim')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="role" class="form-label">Peran / Jabatan</label>
-                        <input 
-                            type="text" 
-                            name="role" 
-                            id="role" 
-                            class="form-control" 
-                            value="{{ old('role') }}" 
-                            placeholder="Contoh: Frontend Developer" 
-                            required
-                        >
-                        @error('role')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <!-- Email & Phone Input Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label for="email" class="form-label">Alamat Email</label>
-                        <input 
-                            type="email" 
-                            name="email" 
-                            id="email" 
-                            class="form-control" 
-                            value="{{ old('email') }}" 
-                            placeholder="nama@student.univ.ac.id" 
-                            required
-                        >
-                        @error('email')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone" class="form-label">Nomor Telepon / WA</label>
-                        <input 
-                            type="text" 
-                            name="phone" 
-                            id="phone" 
-                            class="form-control" 
-                            value="{{ old('phone') }}" 
-                            placeholder="Contoh: +62812345678"
-                        >
-                        @error('phone')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <!-- Social Links Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label for="github" class="form-label">Link GitHub (Opsional)</label>
-                        <input 
-                            type="url" 
-                            name="github" 
-                            id="github" 
-                            class="form-control" 
-                            value="{{ old('github') }}" 
-                            placeholder="https://github.com/username"
-                        >
-                        @error('github')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="linkedin" class="form-label">Link LinkedIn (Opsional)</label>
-                        <input 
-                            type="url" 
-                            name="linkedin" 
-                            id="linkedin" 
-                            class="form-control" 
-                            value="{{ old('linkedin') }}" 
-                            placeholder="https://linkedin.com/in/username"
-                        >
-                        @error('linkedin')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <!-- Bio / Deskripsi -->
+                <!-- NIM Input -->
                 <div class="form-group">
-                    <label for="bio" class="form-label">Biografi Singkat</label>
+                    <label for="nim" class="form-label">Nomor Induk Mahasiswa (NIM)</label>
+                    <input 
+                        type="text" 
+                        name="nim" 
+                        id="nim" 
+                        class="form-control" 
+                        value="{{ old('nim') }}" 
+                        placeholder="NIM Anggota" 
+                        required
+                    >
+                    @error('nim')
+                        <span class="form-error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Tanggung Jawab Input -->
+                <div class="form-group">
+                    <label for="tanggung_jawab" class="form-label">Tanggung Jawab</label>
                     <textarea 
-                        name="bio" 
-                        id="bio" 
+                        name="tanggung_jawab" 
+                        id="tanggung_jawab" 
                         rows="4" 
                         class="form-control" 
-                        placeholder="Deskripsikan secara singkat keahlian, tugas, atau biografi anggota di kelompok ini..."
-                    >{{ old('bio') }}</textarea>
-                    @error('bio')
+                        placeholder="Deskripsikan tanggung jawab anggota dalam kelompok..."
+                    >{{ old('tanggung_jawab') }}</textarea>
+                    @error('tanggung_jawab')
                         <span class="form-error">{{ $message }}</span>
                     @enderror
                 </div>
@@ -189,11 +104,11 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const photoInput = document.getElementById('photoInput');
+        const fotoInput = document.getElementById('fotoInput');
         const photoPreview = document.getElementById('photoPreview');
         const previewPlaceholder = document.getElementById('previewPlaceholder');
 
-        photoInput.addEventListener('change', function() {
+        fotoInput.addEventListener('change', function() {
             const file = this.files[0];
             if (file) {
                 const reader = new FileReader();
