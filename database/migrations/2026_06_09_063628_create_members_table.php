@@ -13,16 +13,11 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nama');
             $table->string('nim');
-            $table->string('role');
-            $table->string('email');
-            $table->string('phone')->nullable();
-            $table->string('photo')->nullable();
-            $table->string('github')->nullable();
-            $table->string('linkedin')->nullable();
-            $table->text('bio')->nullable();
-            $table->timestamps();
+            $table->string('tanggung_jawab');
+            $table->string('foto')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
