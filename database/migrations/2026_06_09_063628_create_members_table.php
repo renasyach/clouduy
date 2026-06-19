@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nim');
             $table->string('tanggung_jawab');
             $table->string('foto')->nullable();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
         });
     }
 
